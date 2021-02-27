@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class SquareTest {
-	MazeMap mapp = new MazeMap(2,2, new boolean[] {true, true, true, true}) ;
+	MazeMap mapp = new MazeMap(2,2, new boolean[] {true, false, false, true}) ;
 	Square vierkant = Square.of(mapp,1,1);
+	Square neigbor = Square.of(mapp, 1, 0);
 	@Test
 	void testGetMazeMap() {
 
@@ -24,12 +25,12 @@ class SquareTest {
 
 	@Test
 	void testGetColumnIndex() {
-		fail("Not yet implemented");
+		assert (vierkant.getColumnIndex()==1);
 	}
 
 	@Test
 	void testIsPassable() {
-		fail("Not yet implemented");
+		assert vierkant.isPassable();
 	}
 
 	@Test
@@ -39,17 +40,24 @@ class SquareTest {
 
 	@Test
 	void testGetNeighbor() {
-		fail("Not yet implemented");
+		  
+		Square neigbor1 = vierkant.getNeighbor(Direction.LEFT);
+		assert ( neigbor1.getRowIndex() == neigbor.getRowIndex());
+		assert ( neigbor1.getColumnIndex() == neigbor.getColumnIndex());
+		assert ( neigbor1.getMazeMap() == neigbor.getMazeMap());
+		
 	}
 
 	@Test
 	void testCanMove() {
-		fail("Not yet implemented");
+		
+		assert (!(vierkant.canMove(Direction.UP) ) );
+		
 	}
 
 	@Test
 	void testGetPassableDirectionsExcept() {
-		fail("Not yet implemented");
+		System.out.println(neigbor.getPassableDirectionsExcept(Direction.DOWN).length);
 	}
 
 	@Test

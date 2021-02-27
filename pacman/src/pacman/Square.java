@@ -66,7 +66,7 @@ public class Square {
 				
 			}
 		}
-		if (direction == Direction.RIGHT) {
+		else if (direction == Direction.RIGHT) {
 			 newrow = roww;
 			
 			if (ogcolumn == breedte-1) {
@@ -76,7 +76,7 @@ public class Square {
 				
 			}
 		}
-		if (direction == Direction.UP) {
+		else if (direction == Direction.UP) {
 			
 			 newcolumn = ogcolumn;
 			if (roww == 0) {
@@ -87,7 +87,7 @@ public class Square {
 			}
 			
 		}
-		if (direction == Direction.DOWN) {
+		else if (direction == Direction.DOWN) {
 			
 			 newcolumn = ogcolumn;
 			if (roww == hoogte-1) {
@@ -130,22 +130,23 @@ public class Square {
 		int counter = 0 ;
 		Direction[] richtingen = new Direction[4];
 		
-		if ((canMove(Direction.UP)) && (excludedDirection != Direction.UP));{
+		if ((canMove(Direction.UP)) && (excludedDirection != Direction.UP)){
 			richtingen[0] = Direction.UP;
 			counter++;
 		}
-		if ((canMove(Direction.DOWN)) && (excludedDirection != Direction.DOWN));{
+		if ((canMove(Direction.DOWN)) && (excludedDirection != Direction.DOWN)){
 			richtingen[1] = Direction.DOWN;
 			counter++;
 		}
-		if ((canMove(Direction.LEFT)) && (excludedDirection != Direction.LEFT));{
+		if ((canMove(Direction.LEFT)) && (excludedDirection != Direction.LEFT)){
 			richtingen[2] = Direction.LEFT;
 			counter++;
 		}
-		if ((canMove(Direction.RIGHT)) && (excludedDirection != Direction.RIGHT));{
+		if ((canMove(Direction.RIGHT)) && (excludedDirection != Direction.RIGHT)){
 			richtingen[3] = Direction.RIGHT;
 			counter++;
 		}
+		
 		Direction[] eindrichtingen = new Direction[counter];
 		int telding = 0;
 			for (int i=0 ; i<4; i++)
