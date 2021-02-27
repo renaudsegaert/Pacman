@@ -151,7 +151,7 @@ public class Square {
 		int telding = 0;
 			for (int i=0 ; i<4; i++)
 				if (richtingen[i] != null) {
-					eindrichtingen[i] = richtingen[i-telding];
+					eindrichtingen[i-telding] = richtingen[i];
 					
 					
 				}else {
@@ -160,6 +160,7 @@ public class Square {
 		
 		
 		return eindrichtingen;
+		
 	}
 	
 	/**

@@ -35,7 +35,7 @@ public class MazeView extends JPanel {
 		Image image = Toolkit.getDefaultToolkit().getImage(url);
 		return image.getScaledInstance(squareSize, squareSize, Image.SCALE_SMOOTH);
 	}
-	private static Image pacManImage = loadSquareImage("PacMan.png");
+	private static Image pacManImage = loadSquareImage("pacMan.png");
 	private static Image ghostImage = loadSquareImage("ghost.png");
 	
 	private Maze maze;
