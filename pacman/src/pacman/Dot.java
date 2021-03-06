@@ -9,7 +9,12 @@ public class Dot {
 	public Square getSquare() { 
 		return this.vierkant;
 	}
-	
+	/**
+	 * 
+	 * @param square
+	 * 
+	 * @post | getSquare() == square
+	 */
 	public Dot(Square square) { 
 		this.vierkant = square;
 	}
