@@ -135,7 +135,7 @@ public class MazeView extends JPanel {
 		super.paintComponent(g);
 		
 		// Walls
-		g.setColor(Color.blue);
+		g.setColor(Color.BLUE);
 		for (int row = 0; row < map.getHeight(); row++)
 			for (int column = 0; column < map.getWidth(); column++)
 				if (!map.isPassable(row, column))

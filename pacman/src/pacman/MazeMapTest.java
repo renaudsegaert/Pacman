@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class MazeMap_test_case {
+class MazeMapTest {
 	boolean[] cars = {true, false, false,true};
 	MazeMap appel = new MazeMap(2,2,  cars  );
 	@Test

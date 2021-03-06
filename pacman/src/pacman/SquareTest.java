@@ -12,7 +12,7 @@ class SquareTest {
 	void testGetMazeMap() {
 
 		
-		assert (vierkant.getMazeMap() != mapp);
+		assert (vierkant.getMazeMap() == mapp);
 		
 		
 		
@@ -35,7 +35,11 @@ class SquareTest {
 
 	@Test
 	void testOf() {
-		fail("Not yet implemented");
+		Square vierkant1 = Square.of(mapp,0,0);
+		assert (vierkant1.getColumnIndex()==0);
+		assert (vierkant1.getRowIndex()==0);
+		assert (vierkant1.isPassable());
+		
 	}
 
 	@Test
@@ -57,12 +61,13 @@ class SquareTest {
 
 	@Test
 	void testGetPassableDirectionsExcept() {
-		System.out.println(neigbor.getPassableDirectionsExcept(Direction.DOWN).length);
+		assert (neigbor.getPassableDirectionsExcept(Direction.DOWN).length ==3);
 	}
 
 	@Test
 	void testEqualsSquare() {
-		fail("Not yet implemented");
+		Square neigbor1 = vierkant.getNeighbor(Direction.LEFT);
+		assert (neigbor1.equals(neigbor));
 	}
 
 }

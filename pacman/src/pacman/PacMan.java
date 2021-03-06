@@ -28,7 +28,13 @@ public class PacMan {
 	 * Decreases this Pac-Man character's number of lives by one.
 	 */
 	public void die() { 
-		int oudelevens = this.lives;
+		if ( getNbLives()<=0) {
+			throw new IllegalArgumentException("levens zijn al te weinig");
+			
+		}
+		
+			int oudelevens = this.lives;
+		
 		this.lives = oudelevens-1;
 	}
 
