@@ -5,11 +5,29 @@ import java.util.Arrays;
 /**
  * Each instance of this class represents a position in a maze, specified by a row index and a column index.
  * The top row and the leftmost column have index 0.
+ * 
+ * @immutable
+ * 
  */
 public class Square {
 	private MazeMap map;
+	
+	/**
+	 * rijen moeten index 0 of meer hebben en kleiner zijn dan de hoogte van de map
+	 * 
+	 * @invar	| 0 <= row && row <= map.height
+	 * 
+	 */
 	private int row;
+	
+	/*
+	 * kolommen moeten index 0 of meer hebben en kleiner zijn dan de breedte van de map
+	 * 
+	 * @invar	| 0 <= column && column <= map.width
+	 * 
+	 */
 	private int column;
+	
 	
 	public MazeMap getMazeMap() { 
 		return this.map;
@@ -29,12 +47,23 @@ public class Square {
 		return this.map.isPassable(this.row,this.column);
 	}
 	
+	/*
+	 * mazeMap, rowIndex en columnIndex moeten juiste waarden hebben.
+	 * 
+	 * @pre	| 0 <= columnIndex && columnIndex <= mazemap.width
+	 * @pre	| 0 <= rowIndex && rowIndex <= mazeMap.height
+	 * 
+	 * @post | vierkant.row == getRowIndex()
+	 * @post | vierkant.column == getColumnIndex()
+	 * 
+	 */
+	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
 		
 		Square vierkant = new Square();
 		vierkant.map = mazeMap;
 		vierkant.row = rowIndex;
-		vierkant.column= columnIndex;
+		vierkant.column = columnIndex;
 		return vierkant;
 	}
 	
@@ -165,6 +194,8 @@ public class Square {
 	
 	/**
 	 * Returns whether the given square refers to the same {@code MazeMap} object and has the same row and column index as this square.  
+	 * 
+	 * 
 	 */
 	public boolean equals(Square other) {
 		if(( this.getMazeMap() == other.getMazeMap()) && (this.getRowIndex() == other.getRowIndex()) && ( this.getColumnIndex()== other.getColumnIndex())) {
