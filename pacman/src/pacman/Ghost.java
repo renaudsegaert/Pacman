@@ -6,8 +6,8 @@ import java.util.Random;
  * Each instance of this class represents a ghost in a Pac-Man maze.
  */
 public class Ghost {
-	Square vierkant;
-	Direction richting;
+	private Square vierkant;
+	private Direction richting;
 	
 	public Square getSquare() { 
 		return this.vierkant;
@@ -15,20 +15,41 @@ public class Ghost {
 	
 	/**
 	 * Returns the direction in which this ghost will preferably move next.
+	 * 
 	 */
 	public Direction getDirection() { 
 		return this.richting;
 	}
-	
+	/**
+	 * 
+	 * @param square
+	 * @param direction
+	 * 
+	 * @post |getSquare() == square
+	 * @post |getDirection()== direction
+	 */
 	public Ghost(Square square, Direction direction) { 
 		this.vierkant = square;
 		this.richting = direction;
 	}
+	/**
+	 * 
+	 * @param square
+	 * 
+	 * @post | getSquare() ==square
+	 * @post | getDirection() == old(getDirection())
+	 */
 	
 	public void setSquare(Square square) { 
 		this.vierkant = square;
 	}
-	
+	/**
+	 * 
+	 * @param direction
+	 * 
+	 * @post | getDirection() == direction
+	 * @post | getSquare() == old(getSquare())
+	 */
 	public void setDirection(Direction direction) { 
 		this.richting = direction;
 	}
