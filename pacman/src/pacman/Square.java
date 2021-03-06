@@ -10,34 +10,40 @@ import java.util.Arrays;
  * 
  */
 public class Square {
-	private MazeMap map;
 	
 	/**
 	 * rijen moeten index 0 of meer hebben en kleiner zijn dan de hoogte van de map
-	 * 
-	 * @invar	| 0 <= row && row <= map.height
-	 * 
-	 */
-	private int row;
-	
-	/*
 	 * kolommen moeten index 0 of meer hebben en kleiner zijn dan de breedte van de map
 	 * 
-	 * @invar	| 0 <= column && column <= map.width
+	 * @invar	| 0 <= row && row <= map.getHeight()
+	 * @invar | 0 <= column && column <= map.getWidth()
 	 * 
 	 */
+	private MazeMap map;
+	private int row;
 	private int column;
 	
+	/*
+	 * @basic
+	 */
 	
 	public MazeMap getMazeMap() { 
 		return this.map;
 		
 	}
 	
+	/*
+	 * @basic
+	 */
+	
 	public int getRowIndex() { 
 		return this.row;
 		
 	}
+	
+	/*
+	 * @basic
+	 */
 	
 	public int getColumnIndex() { 
 		return this.column;
@@ -195,12 +201,20 @@ public class Square {
 	/**
 	 * Returns whether the given square refers to the same {@code MazeMap} object and has the same row and column index as this square.  
 	 * 
+	 * @pre | other != null
+	 * @pre | other.getRowIndex() == getRowIndex()
+	 * @pre | other.getColumnIndex() == getColumnIndex()
+	 * 
+	 * @post | getRowIndex() == old(getRowIndex())
+	 * @post | getColumnIndex() == old(getColumnIndex())
+	 * @post | getMazeMap() == old(getMazeMap())
 	 * 
 	 */
 	public boolean equals(Square other) {
 		if(( this.getMazeMap() == other.getMazeMap()) && (this.getRowIndex() == other.getRowIndex()) && ( this.getColumnIndex()== other.getColumnIndex())) {
 			return true;
-		}else {
+		}
+		else {
 			return false;
 		}
 		
