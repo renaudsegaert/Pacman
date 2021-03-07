@@ -8,17 +8,21 @@ import java.util.Arrays;
  * 
  * @immutable
  * 
+ * 
+ * rijen moeten index 0 of meer hebben en kleiner zijn dan de hoogte van de map
+ * kolommen moeten index 0 of meer hebben en kleiner zijn dan de breedte van de map
+ * 
+ * 
  */
 public class Square {
 	
-	/**
-	 * rijen moeten index 0 of meer hebben en kleiner zijn dan de hoogte van de map
-	 * kolommen moeten index 0 of meer hebben en kleiner zijn dan de breedte van de map
+	/*
+	 * this is a test
 	 * 
-	 * @invar	| 0 <= row && row <= map.getHeight()
-	 * @invar | 0 <= column && column <= map.getWidth()
-	 * 
+	 * @invar | 0 <= getRowIndex() && getRowIndex() < getMazeMap().getHeight()
+	 * @invar | 0 <= getColumnIndex() && getColumnIndex() < getMazeMap().getWidth()
 	 */
+	
 	private MazeMap map;
 	private int row;
 	private int column;

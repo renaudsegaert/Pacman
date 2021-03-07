@@ -22,7 +22,6 @@ public class MazeMap {
 	
 	/**
 	 * Returns the width (i.e. the number of columns) of this maze map.
-
 	 * @post | result >0
 	 */
 	public int getWidth() { 
