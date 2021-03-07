@@ -11,23 +11,23 @@ import java.util.Arrays;
  * 
  * rijen moeten index 0 of meer hebben en kleiner zijn dan de hoogte van de map
  * kolommen moeten index 0 of meer hebben en kleiner zijn dan de breedte van de map
- * 
+ *  @invar | 0 <= getRowIndex()
+ *	@invar | 0 <= getColumnIndex() 
  * 
  */
 public class Square {
 	
-	/*
+	/**
 	 * this is a test
 	 * 
-	 * @invar | 0 <= getRowIndex() && getRowIndex() < getMazeMap().getHeight()
-	 * @invar | 0 <= getColumnIndex() && getColumnIndex() < getMazeMap().getWidth()
+	 *
 	 */
 	
 	private MazeMap map;
 	private int row;
 	private int column;
 	
-	/*
+	/**
 	 * @basic
 	 */
 	
@@ -36,7 +36,7 @@ public class Square {
 		
 	}
 	
-	/*
+	/**
 	 * @basic
 	 */
 	
@@ -45,7 +45,7 @@ public class Square {
 		
 	}
 	
-	/*
+	/**
 	 * @basic
 	 */
 	
@@ -57,19 +57,32 @@ public class Square {
 		return this.map.isPassable(this.row,this.column);
 	}
 	
-	/*
+	/**
 	 * mazeMap, rowIndex en columnIndex moeten juiste waarden hebben.
 	 * 
-	 * @pre	| 0 <= columnIndex && columnIndex <= mazemap.width
-	 * @pre	| 0 <= rowIndex && rowIndex <= mazeMap.height
+	 * @throws IllegalArgumentException | rowIndex <0
+	 * @throws IllegalArgumentException |columnIndex<0
+	 * @throws IllegalArgumentException |columnIndex >= mazeMap.getWidth()
+	 * @throws IllegalArgumentException |rowIndex >= mazeMap.getHeight()
 	 * 
-	 * @post | vierkant.row == getRowIndex()
-	 * @post | vierkant.column == getColumnIndex()
-	 * 
+	 * @post | rowIndex == result.getRowIndex()
+	 * @post | columnIndex == result.getColumnIndex()
+	 * @post | mazeMap == result.getMazeMap()
 	 */
 	
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
-		
+		if (rowIndex <0) {
+			throw new IllegalArgumentException("columnindex has to be a positive integer!");
+		}
+		if (columnIndex<0) {
+			throw new IllegalArgumentException("columnindex has to be a positive integer!");
+		}
+		if (columnIndex >= mazeMap.getWidth()) {
+			throw new IllegalArgumentException("columnindex has to be lower then width of the provided mazemap!");
+		}
+		if (rowIndex >= mazeMap.getHeight()) {
+			throw new IllegalArgumentException("rowindex has to be lower then heigth of the provided mazemap!");
+		}
 		Square vierkant = new Square();
 		vierkant.map = mazeMap;
 		vierkant.row = rowIndex;
@@ -205,9 +218,8 @@ public class Square {
 	/**
 	 * Returns whether the given square refers to the same {@code MazeMap} object and has the same row and column index as this square.  
 	 * 
-	 * @pre | other != null
-	 * @pre | other.getRowIndex() == getRowIndex()
-	 * @pre | other.getColumnIndex() == getColumnIndex()
+	 * @throws | other == null
+	 * 
 	 * 
 	 * @post | getRowIndex() == old(getRowIndex())
 	 * @post | getColumnIndex() == old(getColumnIndex())
@@ -215,6 +227,14 @@ public class Square {
 	 * 
 	 */
 	public boolean equals(Square other) {
+		if (other ==null){
+			throw new IllegalArgumentException("other cant be null!");
+			
+		}
+		
+		
+		
+		
 		if(( this.getMazeMap() == other.getMazeMap()) && (this.getRowIndex() == other.getRowIndex()) && ( this.getColumnIndex()== other.getColumnIndex())) {
 			return true;
 		}
