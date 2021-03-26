@@ -20,5 +20,9 @@ class DotTest {
 		Dot punt1 = new Dot(vierkant1);
 		assert (punt1.getSquare().equals(vierkant1));
 	}
+	void testGetSize() {
+		assert(1== punt.getSize());
+	}
+		
 
 }

@@ -3,12 +3,10 @@ package pacman;
 /**
  * Each instance of this class represents a dot (a piece of food for Pac-Man) in a Pac-Man maze.
  */
-public class Dot {
-	private Square vierkant;
+public class Dot extends FoodItem{
+	static int size = 1;
 	
-	public Square getSquare() { 
-		return this.vierkant;
-	}
+	
 	/**
 	 * 
 	 * @param square
@@ -16,7 +14,13 @@ public class Dot {
 	 * @post | getSquare() == square
 	 */
 	public Dot(Square square) { 
-		this.vierkant = square;
+		super(square);
+		
+		
+	}
+	
+	public int getSize() {
+		return size;
 	}
 
 }
