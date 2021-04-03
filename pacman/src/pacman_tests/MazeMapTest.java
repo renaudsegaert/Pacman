@@ -1,8 +1,10 @@
-package pacman;
+package pacman_tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import pacman.MazeMap;
 
 class MazeMapTest {
 	boolean[] cars = {true, false, false,true};

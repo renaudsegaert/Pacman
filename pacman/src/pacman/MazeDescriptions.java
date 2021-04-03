@@ -17,8 +17,10 @@ public class MazeDescriptions {
 		for (int i = 0; i < passable.length; i++)
 			passable[i] = true;
 		
-		int nbDots = 0;
-		Dot[] dots = new Dot[width * height];
+		int nbFooditems = 0;
+		FoodItem[] fooditems = new FoodItem[width * height];
+		
+		
 		
 		int nbGhosts = 0;
 		Ghost[] ghosts = new Ghost[width * height];
@@ -41,7 +43,8 @@ public class MazeDescriptions {
 				switch (c) {
 				case ' ' -> {}
 				case '#' -> {}
-				case '.' -> dots[nbDots++] = new Dot(Square.of(map, row, column));
+				case '.' -> fooditems[nbFooditems++] = new Dot(Square.of(map, row, column));
+				case 'p' -> fooditems[nbFooditems++]= new PowerPellet(Square.of(map, row, column));
 				case 'G' -> ghosts[nbGhosts++] = new Ghost(Square.of(map, row, column), Direction.values()[random.nextInt(Direction.values().length)]);
 				case 'P' -> {
 					if (pacMan != null)
@@ -56,7 +59,7 @@ public class MazeDescriptions {
 		if (pacMan == null)
 			throw new IllegalArgumentException("Maze description does not contain a P character");
 		
-		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(dots, nbDots));
+		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(fooditems, nbFooditems));
 	}
 
 }

@@ -1,7 +1,8 @@
 package pacman;
 
 public class PowerPellet extends FoodItem{
-	static int size=2;
+	
+	static int relativesize= 2;
 	
 	
 	public PowerPellet(Square square) { 
@@ -10,7 +11,12 @@ public class PowerPellet extends FoodItem{
 		
 	}
 	public int getSize() {
-		return size;
+		return relativesize;
+	}
+	@Override
+	public boolean isPowerPellet() {
+		
+		return true;
 	}
 
 

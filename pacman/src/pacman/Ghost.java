@@ -8,11 +8,22 @@ import java.util.Random;
 public class Ghost {
 	private Square vierkant;
 	private Direction richting;
+	private GhostState ghoststate = new RegularGhostState();
+	private Square ogvierkant;
+	
+	
 	
 	public Square getSquare() { 
 		return this.vierkant;
 	}
 	
+	
+	public GhostState getGhostState() {
+		return ghoststate;
+	}
+	public boolean isVulnerable() {
+		return getGhostState().getVulnerable();
+	}
 	/**
 	 * Returns the direction in which this ghost will preferably move next.
 	 * 
@@ -31,6 +42,8 @@ public class Ghost {
 	public Ghost(Square square, Direction direction) { 
 		this.vierkant = square;
 		this.richting = direction;
+		
+		this.ogvierkant = square;
 	}
 	/**
 	 * 
@@ -43,6 +56,9 @@ public class Ghost {
 	public void setSquare(Square square) { 
 		this.vierkant = square;
 	}
+	public void setOGSquare() {
+		this.vierkant = ogvierkant;
+	}
 	/**
 	 * 
 	 * @param direction
@@ -52,6 +68,21 @@ public class Ghost {
 	 */
 	public void setDirection(Direction direction) { 
 		this.richting = direction;
+	}
+	public void setStateVulnerable() {
+		this.ghoststate = new VulnerableGhostState();
+	}
+	public void setStateRegular() {
+		this.ghoststate = new RegularGhostState();
+	}
+	public void setState(GhostState ghoststate) {
+		this.ghoststate = ghoststate;
+	}
+	
+	public void pacManAtePowerPellet() {
+		this.setDirection(getDirection().getOpposite());
+		this.setStateVulnerable();
+		
 	}
 	
 	private static int MOVE_FORWARD_PREFERENCE = 10;
@@ -69,8 +100,18 @@ public class Ghost {
 	}
 	
 	// No formal document required
-	public void move(Random random) {
+	public void reallyMove(Random random) {
 		setDirection(chooseNextMoveDirection(random));
 		setSquare(getSquare().getNeighbor(getDirection()));
+	}
+	
+	public void move(Random random) {
+		
+		setState(getGhostState().move(this,random));
+	}
+	
+	public void hitBy(PacMan pacMan) {
+
+		setState(getGhostState().hitBy(this, pacMan));
 	}
 }

@@ -4,7 +4,7 @@ package pacman;
  * Each instance of this class represents a dot (a piece of food for Pac-Man) in a Pac-Man maze.
  */
 public class Dot extends FoodItem{
-	static int size = 1;
+	static int relativesize = 1;
 	
 	
 	/**
@@ -20,7 +20,13 @@ public class Dot extends FoodItem{
 	}
 	
 	public int getSize() {
-		return size;
+		return relativesize;
+	}
+
+	@Override
+	public boolean isPowerPellet() {
+		
+		return false;
 	}
 
 }

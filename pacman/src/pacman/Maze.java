@@ -17,7 +17,7 @@ public class Maze {
 	
 	public Ghost[] getGhosts() { return ghosts.clone(); }
 	
-	public FoodItem[] getFoodItem() { return fooditems.clone(); }
+	public FoodItem[] getFoodItems() { return fooditems.clone(); }
 	
 	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] fooditems) {
 		this.random = random;
@@ -34,7 +34,7 @@ public class Maze {
 	private void checkPacManDamage() {
 		for (Ghost ghost : ghosts)
 			if (ghost.getSquare().equals(pacMan.getSquare()))
-				pacMan.die();
+				ghost.hitBy(pacMan);
 	}
 	
 	public void moveGhosts() {
@@ -49,6 +49,21 @@ public class Maze {
 		System.arraycopy(fooditems, index + 1, newFoodItems, index, newFoodItems.length - index);
 		fooditems = newFoodItems;
 	}
+	/*
+	 * beide getters hier toegevoegd
+	 */
+	private FoodItem getFoodItemAtIndex(int index) {
+		return fooditems[index];
+	}
+	
+	private FoodItem getFoodItemAtSquare(Square square) {
+		for (int i =0; i< fooditems.length;i++) {
+			if (fooditems[i].getSquare().equals(square)){
+				return getFoodItemAtIndex(i);
+			}
+		}
+		return null;
+	}
 	
 	private void removeFoodItemAtSquare(Square square) {
 		for (int i = 0; i < fooditems.length; i++) {
@@ -58,11 +73,20 @@ public class Maze {
 			}
 		}
 	}
-	
+	/**
+	 * tweede if statement toegevoegd dus daar is miss iets fout, deze != null miss nog aanpassa want is niet deftig voor 6/6
+	 * @param direction
+	 */
 	public void movePacMan(Direction direction) {
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
 			pacMan.setSquare(newSquare);
+			if  ((getFoodItemAtSquare(newSquare) != null) && (getFoodItemAtSquare(newSquare).isPowerPellet()) ){
+				for (Ghost g : ghosts) {
+					g.pacManAtePowerPellet();
+					
+				}
+			}
 			removeFoodItemAtSquare(newSquare);
 			checkPacManDamage();
 		}
