@@ -29,4 +29,11 @@ public class Dot extends FoodItem{
 		return false;
 	}
 
+	@Override
+	public void eatenbypacman(Maze maze) {
+		
+		
+		
+	}
+
 }

@@ -8,6 +8,7 @@ public abstract class FoodItem {
 	public FoodItem(Square vierkantt) {
 		this.vierkant = vierkantt;
 	}
+	abstract public void eatenbypacman(Maze maze);
 	
 	abstract public int getSize();
 	abstract public boolean isPowerPellet();

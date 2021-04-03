@@ -18,6 +18,15 @@ public class PowerPellet extends FoodItem{
 		
 		return true;
 	}
+	@Override
+	public void eatenbypacman(Maze maze) {
+		Ghost[] geesten = maze.getGhosts();
+		for (Ghost g  :  geesten) {
+			g.pacManAtePowerPellet();
+		}
+		maze.setGhosts(geesten);
+		
+	}
 
 
 }

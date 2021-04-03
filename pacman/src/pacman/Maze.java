@@ -26,6 +26,8 @@ public class Maze {
 		this.ghosts = ghosts.clone();
 		this.fooditems = fooditems.clone();
 	}
+	public void setGhosts(Ghost[] geesten) {ghosts = geesten.clone();}
+	
 	
 	public boolean isCompleted() {
 		return fooditems.length == 0;
@@ -81,12 +83,19 @@ public class Maze {
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
 			pacMan.setSquare(newSquare);
+			for (int i = 0; i < fooditems.length; i++) {
+				if (fooditems[i].getSquare().equals(newSquare)){
+					fooditems[i].eatenbypacman(this);
+				}
+			}
+			
+			/*
 			if  ((getFoodItemAtSquare(newSquare) != null) && (getFoodItemAtSquare(newSquare).isPowerPellet()) ){
 				for (Ghost g : ghosts) {
 					g.pacManAtePowerPellet();
 					
 				}
-			}
+			}*/
 			removeFoodItemAtSquare(newSquare);
 			checkPacManDamage();
 		}
