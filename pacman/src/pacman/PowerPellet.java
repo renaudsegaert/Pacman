@@ -10,6 +10,13 @@ public class PowerPellet extends FoodItem{
 		
 		
 	}
+	/**
+	 *  
+	 *  @inspects| this
+	 *  @post| result ==2
+	 *  
+	 *  
+	 */
 	public int getSize() {
 		return relativesize;
 	}

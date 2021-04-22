@@ -38,7 +38,7 @@ public class MazeView extends JPanel {
 	}
 	private static Image pacManImage = loadSquareImage("PacMan.png");
 	private static Image ghostImage = loadSquareImage("ghost.png");
-	private static Image vulnerableGhostImage = loadSquareImage("Vulnerable-ghost.png");
+	private static Image vulnerableGhostImage = loadSquareImage("JEF.png");
 	
 	private Maze maze;
 	private MazeMap map;

@@ -18,7 +18,15 @@ public class Dot extends FoodItem{
 		
 		
 	}
-	
+	/**
+	 * @inspects | this
+	 * 
+	 * 
+	 * 
+	 * @post| result ==1
+	 * 
+	 * 
+	 */
 	public int getSize() {
 		return relativesize;
 	}
