@@ -54,7 +54,7 @@ public class Square {
 	}
 	
 	public boolean isPassable() { 
-		return this.map.isPassable(this.row,this.column);
+		return this.map.isPassable(getRowIndex(),getColumnIndex());
 	}
 	
 	/**

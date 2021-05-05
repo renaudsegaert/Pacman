@@ -3,6 +3,9 @@ package pacman;
 import java.util.Arrays;
 import java.util.Random;
 
+import pacman.wormholes.ArrivalPortal;
+import pacman.wormholes.DeparturePortal;
+
 public class MazeDescriptions {
 	
 	private MazeDescriptions() { throw new AssertionError("This class is not intended to be instantiated"); }
@@ -19,9 +22,14 @@ public class MazeDescriptions {
 		
 		int nbFooditems = 0;
 		FoodItem[] fooditems = new FoodItem[width * height];
+		//nieuwe code
+		int nbbeginportalen = 0;
+		DeparturePortal[] beginportalen = new DeparturePortal[width*height];
 		
+		int nbeindportalen = 0;
+		ArrivalPortal[] eindportalen = new ArrivalPortal[width * height];
 		
-		
+		//hierboven is nieuw
 		int nbGhosts = 0;
 		Ghost[] ghosts = new Ghost[width * height];
 		
@@ -45,6 +53,10 @@ public class MazeDescriptions {
 				case '#' -> {}
 				case '.' -> fooditems[nbFooditems++] = new Dot(Square.of(map, row, column));
 				case 'p' -> fooditems[nbFooditems++]= new PowerPellet(Square.of(map, row, column));
+				//hieronder
+				case 'D' -> beginportalen[nbbeginportalen++] = new DeparturePortal(Square.of(map,row,column));
+				case 'A' -> eindportalen[nbeindportalen++] = new ArrivalPortal(Square.of(map,row,column));
+				//hierboven
 				case 'G' -> ghosts[nbGhosts++] = new Ghost(Square.of(map, row, column), Direction.values()[random.nextInt(Direction.values().length)]);
 				case 'P' -> {
 					if (pacMan != null)
@@ -59,7 +71,8 @@ public class MazeDescriptions {
 		if (pacMan == null)
 			throw new IllegalArgumentException("Maze description does not contain a P character");
 		
-		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(fooditems, nbFooditems));
+		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(fooditems, nbFooditems), Arrays.copyOf(beginportalen, nbbeginportalen),Arrays.copyOf(eindportalen, nbeindportalen));
+		
 	}
 
 }

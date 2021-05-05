@@ -2,6 +2,10 @@ package pacman;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.ArrayList;
+import pacman.wormholes.ArrivalPortal;
+import pacman.wormholes.DeparturePortal;
+import pacman.wormholes.Wormhole;
 
 public class Maze {
 	
@@ -10,6 +14,19 @@ public class Maze {
 	private PacMan pacMan;
 	private Ghost[] ghosts;
 	private FoodItem[] fooditems;
+	//begin toegevoegde code
+	private DeparturePortal[] beginportalen;
+	private ArrivalPortal[] eindportalen;
+	private Wormhole[] wormhollen = new Wormhole[0];
+	
+	public DeparturePortal[] getDeparturePortals() {return beginportalen.clone();}
+	public ArrivalPortal[] getArrivalPortals() {return eindportalen.clone();}
+	public Wormhole[] getWormholes() {return wormhollen.clone();}
+	
+	
+	
+	
+	// einde code
 	
 	public MazeMap getMap() { return map; }
 	
@@ -19,13 +36,45 @@ public class Maze {
 	
 	public FoodItem[] getFoodItems() { return fooditems.clone(); }
 	
-	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] fooditems) {
+	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] fooditems, DeparturePortal[] beginportalen,ArrivalPortal[] eindportalen) {
 		this.random = random;
 		this.map = map;
 		this.pacMan = pacMan;
 		this.ghosts = ghosts.clone();
 		this.fooditems = fooditems.clone();
+		// code eronder
+		this.beginportalen= beginportalen.clone();
+		this.eindportalen = eindportalen.clone();
+		//code erbove
 	}
+	//functie hieronder toegevoegd
+	public void addWormhole(Wormhole wormhol) {
+		 
+		 if (Arrays.asList(getDeparturePortals()).contains(wormhol.getDeparturePortal()) && Arrays.asList(getArrivalPortals()).contains(wormhol.getArrivalPortal())) {
+			 int aantalwormhollen = getWormholes().length;
+			 Wormhole[] nieuwwormhollen = new Wormhole[aantalwormhollen+1];
+			 for (int i =0; i<aantalwormhollen;i++) {
+				 nieuwwormhollen[i] = getWormholes()[i];
+			 }
+			 
+			 nieuwwormhollen[aantalwormhollen] = wormhol;
+			 this.wormhollen = nieuwwormhollen;
+		}
+		 
+		 else if (Arrays.asList(getDeparturePortals()).contains(wormhol.getDeparturePortal()) && !Arrays.asList(getArrivalPortals()).contains(wormhol.getArrivalPortal()) ) {
+			 throw new IllegalArgumentException("het eindportaal van het wormhol dat je hebt gegeven zit niet in de maze!!!");
+			 
+		 }
+		 else if (!Arrays.asList(getDeparturePortals()).contains(wormhol.getDeparturePortal()) && Arrays.asList(getArrivalPortals()).contains(wormhol.getArrivalPortal()) ){
+			 throw new IllegalArgumentException("het beginportaal van het wormhol dat je hebt gegeven zit niet in de maze!!!");
+		 }
+		 else {
+			 throw new IllegalArgumentException("zowel het beginportaal van het wormhol als het eindportaal van het wormhol dat je hebt gegeven zit niet in de maze!!!");
+		 }
+		 
+		 	
+	}
+	//functie hierbove toegevoegd
 	public void setGhosts(Ghost[] geesten) {ghosts = geesten.clone();}
 	
 	
@@ -75,29 +124,36 @@ public class Maze {
 			}
 		}
 	}
-	/**
-	 * tweede if statement toegevoegd dus daar is miss iets fout, deze != null miss nog aanpassa want is niet deftig voor 6/6
-	 * @param direction
-	 */
+
 	public void movePacMan(Direction direction) {
+		
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
 			pacMan.setSquare(newSquare);
-			for (int i = 0; i < fooditems.length; i++) {
+			for (int i = 0; i < getFoodItems().length; i++) {
 				if (fooditems[i].getSquare().equals(newSquare)){
 					fooditems[i].eatenbypacman(this);
 				}
 			}
+			removeFoodItemAtSquare(newSquare);
 			
-			/*
-			if  ((getFoodItemAtSquare(newSquare) != null) && (getFoodItemAtSquare(newSquare).isPowerPellet()) ){
-				for (Ghost g : ghosts) {
-					g.pacManAtePowerPellet();
+			checkPacManDamage();
+			//nieuwe code
+			ArrayList<Wormhole> mogelijkekanshebbers= new ArrayList<Wormhole>();
+			
+			for (int i = 0; i < getWormholes().length; i++) {
+				if (getWormholes()[i].getDeparturePortal().getSquare().equals(newSquare)){
+					mogelijkekanshebbers.add(getWormholes()[i]);
 					
 				}
-			}*/
-			removeFoodItemAtSquare(newSquare);
-			checkPacManDamage();
+				
+			}
+			if (mogelijkekanshebbers.size()>=1) {
+				pacMan.setSquare(mogelijkekanshebbers.get(random.nextInt(mogelijkekanshebbers.size())).getArrivalPortal().getSquare());
+				checkPacManDamage();
+			}
+			
+			
 		}
 	}
 	
