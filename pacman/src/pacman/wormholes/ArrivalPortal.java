@@ -14,7 +14,7 @@ import pacman.Square;
  * 
  * 
  */
-public class ArrivalPortal implements Cloneable{
+public class ArrivalPortal {
 	/**
 	 * 
 	 * @invar | vierkant!=null
@@ -145,23 +145,4 @@ public class ArrivalPortal implements Cloneable{
 	
 	
 	
-	
-	
-	protected ArrivalPortal clone() {
-		ArrivalPortal nieuwportaal = new ArrivalPortal(getSquare());
-		for (Wormhole hol : getWormholes()) {
-			nieuwportaal.addWormhole(hol);
-		}
-		return nieuwportaal;
-	}
-	public boolean equals(ArrivalPortal eindportaal2) {
-		
-		if (getSquare().equals(eindportaal2.getSquare()) && getWormholes().equals(eindportaal2.getWormholes())) {
-			
-			return true;}
-			else {
-				return false;
-			
-		}
-	}
 }
