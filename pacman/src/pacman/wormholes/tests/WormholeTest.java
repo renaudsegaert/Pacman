@@ -25,6 +25,14 @@ class WormholeTest {
 		assert(true);
 		
 	}
+	void getSquare() {
+		assert(beginportaal.getSquare().equals(vierkant));
+		assert(eindportaal.getSquare().equals(neigbor));
+	}
+	void getWormholes() {
+		assert(beginportaal.getWormholes().contains(wormhol));
+		assert(eindportaal.getWormholes().contains(wormhol));
+	}
 
 	@Test
 	void testGetDeparturePortal() {
@@ -40,7 +48,11 @@ class WormholeTest {
 	}
 
 	@Test
-	void testSetDeparturePortal() {
+	void testSetPortals() {
+		wormhol.setArrivalPortal(eindportaal2);
+		wormhol.setDeparturePortal(beginportaal2);
+		assert(wormhol.getArrivalPortal()==eindportaal2);
+		assert(wormhol.getDeparturePortal()==beginportaal2);
 		wormhol.setArrivalPortal(eindportaal2);
 		wormhol.setDeparturePortal(beginportaal2);
 		assert(wormhol.getArrivalPortal()==eindportaal2);

@@ -2,7 +2,7 @@ package pacman.wormholes;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import logicalcollections.LogicalSet;
 import pacman.Square;
 /**
  * 
@@ -12,17 +12,18 @@ import pacman.Square;
  * @invar| getWormholes() != null
  * @invar| getWormholes().stream().allMatch(w-> w!=null && w.getArrivalPortal()==this)
  * 
+ * 
  */
-public class ArrivalPortal {
+public class ArrivalPortal implements Cloneable{
 	/**
-	 * @representationObject
+	 * 
 	 * @invar | vierkant!=null
 	 * @invar | vierkant.isPassable()
-	 * 
+	 * @immutable
 	 */
-	private Square vierkant;
+	private final Square vierkant;
 	/**
-	 * @peerObjects
+	 * @representationobject
 	 * @invar | wormhollen !=null
 	 * @invar | wormhollen.stream().allMatch(w-> w!=null && w.getArrivalPortal()==this)
 	 */
@@ -74,19 +75,23 @@ public class ArrivalPortal {
 	/**
 	 * 
 	 * @throws IllegalArgumentException | wormhol == null
+	 * @throws IllegalArgumentException | wormhol.getArrivalPortal()!=this
 	 * @param wormhol
 	 * 
-	 * @mutates | this
+	 * 
 	 * @mutates_properties getWormholes()
 	 * 
 	 * @post | old(getSquare()).equals(getSquare())
-	 * @post  getWormholes().equals(LogicalSet.plus(old(getWormholes()),wormhol))
+	 * @post | getWormholes().equals(LogicalSet.plus(old(getWormholes()),wormhol))
 	 * 
 	 */
 	void addWormhole(Wormhole wormhol) {
 		
 		if (wormhol==null) {
-			throw new IllegalArgumentException("wormhol is null en dat mag nu eenmaal niet in deze functie :(");
+			throw new IllegalArgumentException("wormhol is null");
+		}
+		if(wormhol.getArrivalPortal()!=this) {
+			throw new IllegalArgumentException("wormhol heeft dit arrival portal niet als arrivalportal");
 		}
 		wormhollen.add(wormhol);
 		
@@ -96,24 +101,67 @@ public class ArrivalPortal {
 	 * @throws IllegalArgumentException | !getWormholes().contains(wormhol)
 	 * @param wormhol
 	 * 
-	 * @mutates | this
+	 * 
 	 * @mutates_properties getWormholes()
 	 * 
 	 * @post | old(getSquare()).equals(getSquare())
-	 * @post  getWormholes().equals(LogicalSet.minus(old(getWormholes()),wormhol))
+	 * @post | getWormholes().equals(LogicalSet.minus(old(getWormholes()),wormhol))
 	 
 	 */
 	void deleteWormhole(Wormhole wormhol) {
 		if (wormhol==null) {
-			throw new IllegalArgumentException("wormhol is null en dat mag nu eenmaal niet in deze functie :(");
+			throw new IllegalArgumentException("wormhol is null!!");
 		}
 		if (!getWormholes().contains(wormhol)) {
 			throw new IllegalArgumentException("wormhol is nog niet toegevoegd aan dit arrivalportaal en kan dus niet verwijderd worden");
 		}
 		wormhollen.remove(wormhol);
 	}
-	public ArrivalPortal clone() {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	protected ArrivalPortal clone() {
+		ArrivalPortal nieuwportaal = new ArrivalPortal(getSquare());
+		for (Wormhole hol : getWormholes()) {
+			nieuwportaal.addWormhole(hol);
+		}
+		return nieuwportaal;
+	}
+	public boolean equals(ArrivalPortal eindportaal2) {
 		
-		return this;
+		if (getSquare().equals(eindportaal2.getSquare()) && getWormholes().equals(eindportaal2.getWormholes())) {
+			
+			return true;}
+			else {
+				return false;
+			
+		}
 	}
 }
