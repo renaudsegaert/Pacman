@@ -8,9 +8,12 @@ import logicalcollections.LogicalSet;
  * @author renaud en josse
  * 
  * @invar | getDeparturePortal()!=null
- * @invar  getDeparturePortal().getWormholes().contains(this)
  * @invar | getArrivalPortal()!=null
- * @invar  getArrivalPortal().getWormholes().contains(this)
+ * 
+ * 
+ * 
+ * @invar  getDeparturePortal().getWormholes().contains(this)
+ * @invar  getArrivalPortal().getWormholes().contains(this)  # kloppen beide niet 
  * 
  */
 public class Wormhole {
@@ -57,7 +60,6 @@ public class Wormhole {
 		
 		this.beginportaal = beginportaal;
 		this.eindportaal = eindportaal;
-		
 		beginportaal.addWormhole(this);
 		eindportaal.addWormhole(this);
 		
@@ -93,7 +95,8 @@ public class Wormhole {
 	 * 
 	 * @post | getDeparturePortal()==beginportaal
 	 * 
-	 * @mutates_properties | getDeparturePortal().getWormholes()
+	 * @mutates_properties | getDeparturePortal().getWormholes()                       
+	 * 
 	 * @mutates_properties | beginportaal.getWormholes()
 	 * @mutates_properties | getDeparturePortal()
 	 * 

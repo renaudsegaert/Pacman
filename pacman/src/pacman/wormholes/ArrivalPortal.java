@@ -26,6 +26,7 @@ public class ArrivalPortal {
 	 * @representationobject
 	 * @invar | wormhollen !=null
 	 * @invar | wormhollen.stream().allMatch(w-> w!=null && w.getArrivalPortal()==this)
+	 * @mutable
 	 */
 	private Set<Wormhole> wormhollen  = new HashSet<Wormhole>();
 	
@@ -33,10 +34,10 @@ public class ArrivalPortal {
 	 * @param vierkant
 	 * @throws IllegalArgumentException | !vierkant.isPassable()
 	 * @throws IllegalArgumentException | vierkant==null
-	 * @param vierkant1
+	 * 
 	 * @post | getSquare() == vierkant
 	 * @post | getWormholes().size()==0
-	 * @mutates | this
+	 * @mutates_properties | this.getSquare()
 	 * 
 	 */
 	public ArrivalPortal(Square vierkant) {
@@ -62,6 +63,7 @@ public class ArrivalPortal {
 	/**
 	 * 
 	 * @creates | result
+	 * @post | old(getSquare()).equals(getSquare())
 	 * @post | result != null
 	 * @post | result.stream().allMatch(w-> w!=null )
 	 * @post | result.stream().allMatch(w-> w.getArrivalPortal()==this)
@@ -79,7 +81,7 @@ public class ArrivalPortal {
 	 * @param wormhol
 	 * 
 	 * 
-	 * @mutates_properties getWormholes()
+	 * @mutates_properties |this.getWormholes()
 	 * 
 	 * @post | old(getSquare()).equals(getSquare())
 	 * @post | getWormholes().equals(LogicalSet.plus(old(getWormholes()),wormhol))
@@ -102,7 +104,7 @@ public class ArrivalPortal {
 	 * @param wormhol
 	 * 
 	 * 
-	 * @mutates_properties getWormholes()
+	 * @mutates_properties | this.getWormholes()
 	 * 
 	 * @post | old(getSquare()).equals(getSquare())
 	 * @post | getWormholes().equals(LogicalSet.minus(old(getWormholes()),wormhol))
